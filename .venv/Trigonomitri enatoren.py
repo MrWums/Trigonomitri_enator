@@ -46,4 +46,3 @@ elif valg=="markersej":
 
 else:
     print("Ugyldigt input, prøv igen")
-#sut
