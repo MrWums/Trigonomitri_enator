@@ -24,7 +24,7 @@ elif valg=="B" or valg=="b":
             input("Intast bankoplysninger for at lukke programmet :)")
             break
         else:
-            print("Den vinkel er ugyldig prøv igen")
+            print("Den vinkel er ugyldig prøv igen.")
 
 
 elif valg=="C" or valg=="c":
