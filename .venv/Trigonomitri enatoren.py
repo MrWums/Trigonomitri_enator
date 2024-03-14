@@ -1,33 +1,54 @@
-print("davs. Vælg en funktion")
+import math
+import turtle
+print("Davs. Vælg en funktion")
 print("A: 3 sider")
 print("B: 2 sider + 1 vinkel")
 print("C: 1 sider + 2 vinkel")
 
+def resultatprinter(a,b,c,A,B,C):
+    print("side a:", a)
+    print("side b:", b)
+    print("side c:", c)
+    print("vinkel A:", A)
+    print("vinkel B:", B)
+    print("vinkel C:", C)
+    #TODO: lav en turtle der kan tegne
+def tresider(): #Funktion med 3 kendte sider
+    a = float(input("Hvor lang er side a?"))
+    b = float(input("hvor lang er side b?"))
+    c = float(input("hvor lang er side c?"))
+    if a+b>c and a+c>b and b+c>a:
+        A = round(math.degrees(math.acos((b**2+c**2-a**2)/(2*b*c))),8)
+        B = round(math.degrees(math.acos((a**2+c**2-b**2)/(2*a*c))),8)
+        C = round(math.degrees(math.acos((a**2+b**2-c**2)/(2*a*b))),8)
+        resultatprinter(a,b,c,A,B,C)
+    else:
+        print("Ikke gyldig trekant")
+        return tresider()
 
-valg=input("vælg en funktion")
+def tosider(): #Funktion med 2 kendte sider og 1 kendt vinkel
+    a = float(input("Hvor lang er side a?"))
+    b = float(input("Hvor lang er side b?"))
+    vinkel = float(input("Hvor stor er vinkel?"))
+    valg2 = input("Er din vinkel hosliggende til begge sider? Tryk 'j' for ja, ellers tryk på anden tilfældig knap").lower()
+    if valg2 == "j":
+        C = vinkel
+        c = round(math.sqrt(a**2+b**2-2*a*b*math.cos(math.radians(C))), 8)
+        A = round(math.degrees(math.acos((b**2+c**2-a**2)/(2*b*c))),8)
+        B = round(math.degrees(math.acos((a**2+b**2-c**2)/(2*a*b))),8)
+        resultatprinter(a, b, c, A, B, C)
 
-if valg=="A" or valg=="a":
-    side1=float(input("Hvor lang er side a?"))
-    side2=float(input("hvor lang er side b?"))
-    side3=float(input("hvor lang er side c?"))
-
-    print("Jeg ville have beregnet resten af din trekant, men programmet er ufærdigt og side a er",side1,", side b er",side2,", og side c er",side3,)
-    input("Intast bankoplysninger for at lukke programmet :)")
-
-elif valg=="B" or valg=="b":
-    while True:
-        side1 = float(input("Hvor lang er side a?"))
-        side2 = float(input("hvor lang er side b?"))
-        vinkel1 = float(input("hvor stor er din vinkel?"))
-        if vinkel1<180:
-            print("Jeg ville have beregnet resten af din trekant, men programmet er ufærdigt og side a er",side1,", side b er",side2,", og din vinkel er",vinkel1,)
-            input("Intast bankoplysninger for at lukke programmet :)")
-            break
-        else:
-            print("Den vinkel er ugyldig prøv igen.")
+    else:
+        pass
 
 
-elif valg=="C" or valg=="c":
+valg=input("vælg en funktion").lower() #Tager input fra brugeren og vælger en funktion baseret på det
+
+if valg=="a":
+    tresider()
+elif valg=="b":
+    tosider()
+elif valg=="c":
     while True:
         side1 = float(input("Hvor lang er side a?"))
 
