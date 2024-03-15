@@ -12,6 +12,18 @@ def resultatprinter(a,b,c,A,B,C):
     print("vinkel A:", A)
     print("vinkel B:", B)
     print("vinkel C:", C)
+    jens = input("Tryk 't' for at få tegnet trekanten, ellers intast bankoplysninger for at lukke programmet :)").lower()
+    if jens == 't':
+        turtle.speed(1)
+        turtle.forward(10*a) #Ganger siderne med 10 for at trekanten bliver stor nok til at man kan se den
+        turtle.left(180-C)
+        turtle.forward(10*b)
+        turtle.left(180-A)
+        turtle.forward(10*c)
+        turtle.up()
+        turtle.forward(1000)
+        turtle.done()
+        input("Intast bankoplysninger")
     #TODO: lav en turtle der kan tegne
 def tresider(): #Funktion med 3 kendte sider
     a = float(input("Hvor lang er side a?"))
