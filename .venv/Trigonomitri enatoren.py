@@ -39,7 +39,19 @@ def tosider(): #Funktion med 2 kendte sider og 1 kendt vinkel
         resultatprinter(a, b, c, A, B, C)
 
     else:
-        pass
+        valg3 = input("Er din vinkel modstående til side a eller side b? Tryk 'a' for side a, eller 'b' for side b.").lower()
+        if valg3 == "a":
+            A = vinkel
+            B = round(math.degrees(math.asin(b*math.sin(math.radians(A))/a)),8) #laver math (jeg ved ikke hvad der sker at this point)
+            C = 180-A-B
+            c = round(math.sqrt(a**2+b**2-2*a*b*math.cos(math.radians(C))), 8)
+            resultatprinter(a,b,c,A,B,C)
+        elif valg3 == "b":
+            B = vinkel
+            A = round(math.degrees(math.asin(a*math.sin(math.radians(B))/b)),8)
+            C = 180-A-B
+            c = round(math.sqrt(a ** 2 + b ** 2 - 2 * a * b * math.cos(math.radians(C))), 8)
+            resultatprinter(a, b, c, A, B, C)
 
 
 valg=input("vælg en funktion").lower() #Tager input fra brugeren og vælger en funktion baseret på det
