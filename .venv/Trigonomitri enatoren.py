@@ -5,7 +5,7 @@ print("A: 3 sider")
 print("B: 2 sider + 1 vinkel")
 print("C: 1 sider + 2 vinkel")
 
-def resultatprinter(a,b,c,A,B,C):
+def resultatprinter(a,b,c,A,B,C, funktion):
     if a+b>c and a+c>b and b+c>a and A+B+C==180:
         print("side a:", a)
         print("side b:", b)
@@ -27,6 +27,7 @@ def resultatprinter(a,b,c,A,B,C):
             input("Intast bankoplysninger")
     else:
         print("Ugyldig trekant, prøv igen :(")
+        funktion()
     #TODO: Gør turtle bedre
 def tresider(): #Funktion med 3 kendte sider
     a = float(input("Hvor lang er side a?"))
@@ -35,7 +36,7 @@ def tresider(): #Funktion med 3 kendte sider
     A = round(math.degrees(math.acos((b**2+c**2-a**2)/(2*b*c))),8)
     B = round(math.degrees(math.acos((a**2+c**2-b**2)/(2*a*c))),8)
     C = round(math.degrees(math.acos((a**2+b**2-c**2)/(2*a*b))),8)
-    resultatprinter(a,b,c,A,B,C)
+    resultatprinter(a,b,c,A,B,C, tresider)
 
 
 def tosider(): #Funktion med 2 kendte sider og 1 kendt vinkel
@@ -48,7 +49,7 @@ def tosider(): #Funktion med 2 kendte sider og 1 kendt vinkel
         c = round(math.sqrt(a**2+b**2-2*a*b*math.cos(math.radians(C))), 8)
         A = round(math.degrees(math.acos((b**2+c**2-a**2)/(2*b*c))),8)
         B = round(math.degrees(math.acos((a**2+c**2-b**2)/(2*a*c))),8)
-        resultatprinter(a, b, c, A, B, C)
+        resultatprinter(a, b, c, A, B, C, tosider)
 
     else:
         valg3 = input("Er din vinkel modstående til side a eller side b? Tryk 'a' for side a, eller 'b' for side b.").lower()
@@ -57,13 +58,13 @@ def tosider(): #Funktion med 2 kendte sider og 1 kendt vinkel
             B = round(math.degrees(math.asin(b*math.sin(math.radians(A))/a)),8) #laver math (jeg ved ikke hvad der sker at this point)
             C = 180-A-B
             c = round(math.sqrt(a**2+b**2-2*a*b*math.cos(math.radians(C))), 8)
-            resultatprinter(a,b,c,A,B,C)
+            resultatprinter(a,b,c,A,B,C, tosider)
         elif valg3 == "b":
             B = vinkel
             A = round(math.degrees(math.asin(a*math.sin(math.radians(B))/b)),8)
             C = 180-A-B
             c = round(math.sqrt(a ** 2 + b ** 2 - 2 * a * b * math.cos(math.radians(C))), 8)
-            resultatprinter(a, b, c, A, B, C)
+            resultatprinter(a, b, c, A, B, C, tosider)
 
 def enside(): #funktion med en side og to vinkler
     side = float(input("Hvor lang er din side?"))
@@ -75,7 +76,7 @@ def enside(): #funktion med en side og to vinkler
         C = 180-A-B
         b = round((c/math.sin(C))*math.sin(B),8)
         a = round((c/math.sin(C))*math.sin(A),8)
-        resultatprinter(a, b, c, A, B, C)
+        resultatprinter(a, b, c, A, B, C, enside)
 
     else:
         valg3 = input("Er din side modstående til vinkel A eller vinkel B? Tryk på 'a' for vinkel A eller 'b' for vinkel B")
@@ -84,13 +85,13 @@ def enside(): #funktion med en side og to vinkler
             C = 180-A-B
             b = round((a/math.sin(A))*math.sin(B),8)
             c = round((a/math.sin(A))*math.sin(C), 8)
-            resultatprinter(a, b, c, A, B, C)
+            resultatprinter(a, b, c, A, B, C, enside)
         elif valg3 == "b":
             b = side
             C = 180-A-B
             a = round((b/math.sin(B))*math.sin(A), 8)
             c = round((b/math.sin(B))*math.sin(C), 8)
-            resultatprinter(a, b, c, A, B, C)
+            resultatprinter(a, b, c, A, B, C, enside)
 
 valg=input("vælg en funktion").lower() #Tager input fra brugeren og vælger en funktion baseret på det
 
