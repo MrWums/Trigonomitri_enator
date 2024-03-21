@@ -6,37 +6,37 @@ print("B: 2 sider + 1 vinkel")
 print("C: 1 sider + 2 vinkel")
 
 def resultatprinter(a,b,c,A,B,C):
-    print("side a:", a)
-    print("side b:", b)
-    print("side c:", c)
-    print("vinkel A:", A)
-    print("vinkel B:", B)
-    print("vinkel C:", C)
-    jens = input("Tryk 't' for at få tegnet trekanten, ellers intast bankoplysninger for at lukke programmet :)").lower()
-    if jens == 't':
-        turtle.speed(1)
-        turtle.forward(10*a) #Ganger siderne med 10 for at trekanten bliver stor nok til at man kan se den
-        turtle.left(180-C)
-        turtle.forward(10*b)
-        turtle.left(180-A)
-        turtle.forward(10*c)
-        turtle.up()
-        turtle.forward(1000)
-        turtle.done()
-        input("Intast bankoplysninger")
+    if a+b>c and a+c>b and b+c>a and A+B+C==180:
+        print("side a:", a)
+        print("side b:", b)
+        print("side c:", c)
+        print("vinkel A:", A)
+        print("vinkel B:", B)
+        print("vinkel C:", C)
+        jens = input("Tryk 't' for at få tegnet trekanten, ellers intast bankoplysninger for at lukke programmet :)").lower()
+        if jens == 't':
+            turtle.speed(1)
+            turtle.forward(10*a) #Ganger siderne med 10 for at trekanten bliver stor nok til at man kan se den
+            turtle.left(180-C)
+            turtle.forward(10*b)
+            turtle.left(180-A)
+            turtle.forward(10*c)
+            turtle.up()
+            turtle.forward(1000)
+            turtle.done()
+            input("Intast bankoplysninger")
+    else:
+        print("Ugyldig trekant, prøv igen :(")
     #TODO: Gør turtle bedre
 def tresider(): #Funktion med 3 kendte sider
     a = float(input("Hvor lang er side a?"))
     b = float(input("hvor lang er side b?"))
     c = float(input("hvor lang er side c?"))
-    if a+b>c and a+c>b and b+c>a:
-        A = round(math.degrees(math.acos((b**2+c**2-a**2)/(2*b*c))),8)
-        B = round(math.degrees(math.acos((a**2+c**2-b**2)/(2*a*c))),8)
-        C = round(math.degrees(math.acos((a**2+b**2-c**2)/(2*a*b))),8)
-        resultatprinter(a,b,c,A,B,C)
-    else:
-        print("Ikke gyldig trekant")
-        return tresider()
+    A = round(math.degrees(math.acos((b**2+c**2-a**2)/(2*b*c))),8)
+    B = round(math.degrees(math.acos((a**2+c**2-b**2)/(2*a*c))),8)
+    C = round(math.degrees(math.acos((a**2+b**2-c**2)/(2*a*b))),8)
+    resultatprinter(a,b,c,A,B,C)
+
 
 def tosider(): #Funktion med 2 kendte sider og 1 kendt vinkel
     a = float(input("Hvor lang er side a?"))
@@ -76,6 +76,21 @@ def enside(): #funktion med en side og to vinkler
         b = round((c/math.sin(C))*math.sin(B),8)
         a = round((c/math.sin(C))*math.sin(A),8)
         resultatprinter(a, b, c, A, B, C)
+
+    else:
+        valg3 = input("Er din side modstående til vinkel A eller vinkel B? Tryk på 'a' for vinkel A eller 'b' for vinkel B")
+        if valg3 == "a":
+            a = side
+            C = 180-A-B
+            b = round((a/math.sin(A))*math.sin(B),8)
+            c = round((a/math.sin(A))*math.sin(C), 8)
+            resultatprinter(a, b, c, A, B, C)
+        elif valg3 == "b":
+            b = side
+            C = 180-A-B
+            a = round((b/math.sin(B))*math.sin(A), 8)
+            c = round((b/math.sin(B))*math.sin(C), 8)
+            resultatprinter(a, b, c, A, B, C)
 
 valg=input("vælg en funktion").lower() #Tager input fra brugeren og vælger en funktion baseret på det
 
